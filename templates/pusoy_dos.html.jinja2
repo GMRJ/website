@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="/static/bootstrap.css">
+		<link rel="stylesheet" href="/static/cards.css">
+		<meta name="veiwport" content="width=device-width, initial-scale=1">
+		<title>Pusoy Dos</title>
+		<script src="/static/jquery-3.5.1.js"></script>
+		<script>
+
+      		$(document).ready(function(){
+	  		// ALL YOUR CODE HERE
+	  		//END YOUR CODE
+      		});
+
+    	</script>
+	</head>
+	<body>
+	<div class="container">
+
+    		<h1 class="title">Pusoy Dos</h1>
+		<img src="/static/PusoyPic.jpg" alt="Royal Flush" class="pusoypic">
+
+		<h3>The Deck</h3>
+		<p>
+		Pusoy Dos is played with a standard 52 card deck.
+		</p>
+
+		<h3>The Deal</h3>
+		<p>
+		The dealer shuffles the deck and the player to the right of the dealer cuts. The dealer then 
+		deals out every card one at a time beginning with the player to the dealer’s left. In four hand
+		Pusoy Dos every card should be dealt and each player should have 13 cards.  In three hand each 
+		player should have 17 cards with one left over, this remaining card is discarded.
+		</p>
+
+		<h3>Card Ranking</h3>
+		<p>
+		The ranking of the cards in Pusoy Dos is slightly different than other card games. Within each 
+		suit the 2 is the most “powerful” card, followed by ace, king, queen, jack, 10, 9, 8, 7, 6, 5, 4, 
+		and finally 3. The four suits are also ranked with diamonds being the most powerful, followed by 
+		hearts, then spades and finally clubs. So, for example, a 8 of any suit would beat a 7 of any 
+		suit. Similarly, a 7 of diamonds would beat a 7 of hearts.
+		</p>
+
+		<h3>Hands</h3>
+		<p>
+		There are four types of hands in Pusoy Dos. The four types of hands are: singles (just one card), 
+		pairs (a pair of cards of the same number), triples (three cards of the same number), or a 
+		five-card hand (any standard five card poker hand is acceptable and the same ranking system for 
+		poker hands applies in Pusoy Dos). There are no four card hands.
+		</p>
+		
+		<h3>Order of Play</h3>
+		<p>
+		Whichever player that has the 3 of clubs begins each new game. In three hand Pusoy Dos it is 
+		possible that the 3 of clubs was the extra card that was discarded during the deal, in this case 
+		the player with the 3 of spades goes first. The starting player’s first play must include the 3 of 
+		clubs. The first player to play each round decides which type of hand will be played for that round.
+		The players play cards in the center of the in a clockwise direction starting with the lead player. 
+		Once the lead player decides what type of hand is played the rest of the players must follow. For 
+		example, if the lead player plays a pair, all the following players must also play pairs. To play, 
+		the next player must be able to beat the preceding players hand. For example, if Player 1 if plays 
+		a pair of 4’s of hearts, and spades. Player two can then play any pair of cards higher than 4 or the 
+		other pair of 4’s because diamonds beats hearts. A player does not have to play if they do not want 
+		to, even if they can. If a player either cannot or choses not to play, they pass the opportunity to 
+		play to the next player by saying “pass.” If each player declares that they pass, the current round 
+		ends and the pile of cards currently in the center of the table is discarded. The last player to 
+		play on the previous round begins the new one by choosing which type of hand to play, and playing 
+		one of those hands. For example, if Player 1 plays triple 9’s and Player 2 then plays triple jacks, 
+		and Players 3 and 4 pass, player 1 would get the opportunity to play again.  If Player 1 then 
+		passes, the three 9’s and three jacks are discarded and Player 3 gets to decide what type of hand 
+		to play in next round.
+		</p>
+
+		<h3>Objective</h3>
+		<p>
+		Pusoy Dos is unlike many other card games because there is not just one winner, there is only one 
+		loser. The objective of Pusoy Dos is to get rid of all your cards but if a player successfully 
+		plays every card in their hand the rest of the players keep playing until only player is left. That 
+		player losses and deals the next game. When a player goes out the current pile of cards is discarded
+		as if all players passed and the person to the left of the out player begins a new round.
+		</p>
+
+        <br>
+        <br>
+
+        <p> Your lucky card is the {{ cards[num1]['card'] }} of {{ suits[num2]['suit'] }}.</p>
+        {% if num1 == 1 %}
+            <p>Hey its a 2!</p>
+        {% endif %}
+        <br>
+        <br>
+
+		<a href="/">Return to the Home Page</a>
+
+
+
+
+
+
+	</div>
+	</body>
+</html>

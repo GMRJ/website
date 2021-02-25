@@ -1,0 +1,125 @@
+<!doctype html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="/static/bootstrap.css">
+		<link rel="stylesheet" href="/static/cards.css">
+		<meta name="veiwport" content="width=device-width, initial-scale=1">
+		<title>Card Games Home</title>
+		<script src="/static/jquery-3.5.1.js"></script>
+		<script>
+
+      		$(document).ready(function(){
+	  		// ALL YOUR CODE HERE
+				setInterval(function () {
+    				var MainColor = $("#main_title").css("color");
+    				if (MainColor == "rgb(255, 255, 255)")
+        				$("#main_title").css("color", "black")
+    				else
+        				$("#main_title").css("color", "white")
+				}, 1000);
+
+	  		//END YOUR CODE
+      		});
+
+    	</script>
+
+		<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding .row {margin: 0 -5px;}*/
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+
+</style>
+		
+	</head>
+	<body>
+		<div class="container">
+
+			<div id="main_title">
+    		<h1 class="title">My Home Page</h1>
+			</div>
+
+
+	<img src="/static/Background.jpg" alt="Suits" class="spadepic">
+	<p>
+	Welcome to my home page! In order to demonstrate some of the concepts we have learned about html I have
+	made a few pages about one of my favorite hobbies: playing cards. Below you will find a few links to a
+	some of my favorite games.
+	</p>
+    <br>
+            <h6>Check out all of the card games below!</h6>
+            {% for counter in range(0,3) %}
+            <p>{{ games[counter]['name'] }} is a game for {{ games[counter]['players'] }} players.</p>
+            {% endfor %}
+
+	<br>
+	<br>
+	<br>  
+	
+	<div class="row">
+	<div class="column">	
+	<div class="card" style="width: 18rem;">
+  	<div class="card-body">
+    		<h5 class="card-title">Spades</h5>
+    		<h6 class="card-subtitle mb-2 text-muted">Four Player Team Game</h6>
+    		<p class="card-text">Spades is played by two teams of two players. Partners must work together to bid and
+				take books.
+		</p>
+    		<a href="/Spades" class="card-link">Learn to play Spades</a>
+  	</div>
+	</div>
+	</div>
+	
+	<div class="column">	
+	<div class="card" style="width: 18rem;">
+  	<div class="card-body">
+    		<h5 class="card-title">Pusoy Dos</h5>
+    		<h6 class="card-subtitle mb-2 text-muted">Three or Four Player game</h6>
+    		<p class="card-text">Pusoy Dos is a fast paced casual game that ends quickly.
+		</p>
+    		<a href="/Pusoy Dos" class="card-link">Learn to play Pusoy Dos</a>
+  	</div>
+	</div>
+	</div>
+
+	<div class="column">	
+	<div class="card" style="width: 18rem;">
+  	<div class="card-body">
+    		<h5 class="card-title">Euchre</h5>
+    		<h6 class="card-subtitle mb-2 text-muted">Four Player Team game</h6>
+    		<p class="card-text">Euchre is played by two teams of two players who compete to take tricks.
+		</p>
+    		<a href="/Euchre" class="card-link">Learn to play Euchre</a>
+  	</div>
+	</div>
+	</div>
+	</div>
+
+
+	</div>
+	</body>
+</html>

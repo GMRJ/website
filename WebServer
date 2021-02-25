@@ -1,0 +1,65 @@
+from aiohttp import web
+import aiohttp_jinja2
+import jinja2
+from random import randint
+
+
+@aiohttp_jinja2.template('home.html.jinja2')
+async def home(request):
+    return {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'}, {'name': 'Pusoy Dos', 'players': 'three or four'}]}
+
+@aiohttp_jinja2.template('spades.html.jinja2')
+async def spades(request):
+    return{'num1': randint(0, 12),
+            'num2': randint(0, 3),
+           'suits': [{'suit': 'Spades'}, {'suit': 'Clubs'}, {'suit': 'Diamonds'}, {'suit': 'Hearts'}],
+           'cards': [{'card': 'Ace'}, {'card': '2'}, {'card': '3'}, {'card': '4'}, {'card': '5'}, {'card': '6'},
+                     {'card': '7'}, {'card': '8'}, {'card': '9'}, {'card': '10'}, {'card': 'Jack'}, {'card': 'Queen'},
+                     {'card': 'King'}]}
+
+@aiohttp_jinja2.template('euchre.html.jinja2')
+async def euchre(request):
+    return{'num1': randint(0, 12),
+            'num2': randint(0, 3),
+           'suits': [{'suit': 'Spades'}, {'suit': 'Clubs'}, {'suit': 'Diamonds'}, {'suit': 'Hearts'}],
+           'cards': [{'card': 'Ace'}, {'card': '2'}, {'card': '3'}, {'card': '4'}, {'card': '5'}, {'card': '6'},
+                     {'card': '7'}, {'card': '8'}, {'card': '9'},
+                     {'card': '10'}, {'card': 'Jack'}, {'card': 'Queen'}, {'card': 'King'}]}
+
+@aiohttp_jinja2.template('pusoy_dos.html.jinja2')
+async def pusoy_dos(request):
+    return{'num1': randint(0, 12),
+            'num2': randint(0, 3),
+           'suits': [{'suit': 'Spades'}, {'suit': 'Clubs'}, {'suit': 'Diamonds'}, {'suit': 'Hearts'}],
+           'cards': [{'card': 'Ace'}, {'card': '2'}, {'card': '3'}, {'card': '4'}, {'card': '5'}, {'card': '6'},
+                     {'card': '7'}, {'card': '8'}, {'card': '9'},
+                     {'card': '10'}, {'card': 'Jack'}, {'card': 'Queen'}, {'card': 'King'}]}
+
+#async def cardsCSS(request):
+    #return{}
+
+#async def bootstrapCSS(request):
+    #return{}
+
+#async def jquery(request):
+#    return{}
+
+
+
+def main():
+    app = web.Application()
+    aiohttp_jinja2.setup(app,
+                         loader=jinja2.FileSystemLoader('templates'))
+    app.add_routes([web.get('/', home),
+                    web.get('/Spades', spades),
+                    web.get('/Euchre', euchre),
+                    web.get('/Pusoy Dos', pusoy_dos),
+                    web.static('/static','static')
+                    ])
+
+
+    print("Webserver 1.0")
+
+    web.run_app(app, host="127.0.0.1", port=3000)
+
+main()

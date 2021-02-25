@@ -1,0 +1,300 @@
+<!doctype html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="/static/bootstrap.css">
+		<link rel="stylesheet" href="/static/cards.css">
+		<meta name="veiwport" content="width=device-width, initial-scale=1">
+		<title>Euchre</title>
+		<script src="/static/jquery-3.5.1.js"></script>
+		<script>
+
+			$(document).ready(function(){
+  			$("#flip").click(function(){
+    		$("#panel").slideToggle("slow");
+	  		});
+
+
+  			$("#flip1").click(function(){
+    		$("#panel1").slideToggle("slow");
+	  		});
+
+			$("#sit_1").hover(
+       		function(){
+          	$("#sit_1_p").show();
+       		},
+       		function(){
+          	$("#sit_1_p").hide();
+       		});
+			$("#sit_1").mouseenter(function(){
+    		$('#sit_1_p').css("color", "black");
+  			});
+
+			$("#sit_2").hover(
+       		function(){
+          	$("#sit_2_p").show();
+       		},
+       		function(){
+          	$("#sit_2_p").hide();
+       		});
+			$("#sit_2").mouseenter(function(){
+    		$('#sit_2_p').css("color", "black");
+  			});
+
+			$("#sit_3").hover(
+       		function(){
+          	$("#sit_3_p").show();
+       		},
+       		function(){
+          	$("#sit_3_p").hide();
+       		});
+			$("#sit_3").mouseenter(function(){
+    		$('#sit_3_p').css("color", "black");
+  			});
+
+			$("#sit_4").hover(
+       		function(){
+          	$("#sit_4_p").show();
+       		},
+       		function(){
+          	$("#sit_4_p").hide();
+       		});
+			$("#sit_4").mouseenter(function(){
+    		$('#sit_4_p').css("color", "black");
+  			});
+
+			$("#sit_5").hover(
+       		function(){
+          	$("#sit_5_p").show();
+       		},
+       		function(){
+          	$("#sit_5_p").hide();
+       		});
+			$("#sit_5").mouseenter(function(){
+    		$('#sit_5_p').css("color", "black");
+  			});
+
+			$("#sit_6").hover(
+       		function(){
+          	$("#sit_6_p").show();
+       		},
+       		function(){
+          	$("#sit_6_p").hide();
+       		});
+			$("#sit_6").mouseenter(function(){
+    		$('#sit_6_p').css("color", "black");
+  			});
+
+	  		//END YOUR CODE
+      		});
+
+    	</script>
+
+		<style>
+			#panel {
+  				display: none;
+			}
+
+			#panel1 {
+  				display: none;
+			}
+			#sit_1{
+				display: inline;
+			}
+			#sit_1_p{
+				display: inline;
+				color: white;
+			}
+
+			#sit_2{
+				display: inline;
+			}
+			#sit_2_p{
+				display: inline;
+				color: white;
+			}
+
+			#sit_3{
+				display: inline;
+			}
+			#sit_3_p{
+				display: inline;
+				color: white;
+			}
+
+			#sit_4{
+				display: inline;
+			}
+			#sit_4_p{
+				display: inline;
+				color: white;
+			}
+
+			#sit_5{
+				display: inline;
+			}
+			#sit_5_p{
+				display: inline;
+				color: white;
+			}
+
+			#sit_6{
+				display: inline;
+			}
+			#sit_6_p{
+				display: inline;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="container">
+
+    		<h1 class="title">Euchre</h1>
+		<img src="/static/EuchrePic.png" alt="Jack" class="spadepic">
+
+
+			<h3>The Deck</h3>
+
+
+		<p>
+		Euchre is played with a 24 card deck made by removing the 8’s and below of every suit. 
+		This leaves the ace, king, queen, jack, 10, and 9 of every suit.
+		</p>
+
+
+
+			<h3> Set Up and Deal</h3>
+
+
+		<p>
+		Euchre is a four player game played by two teams of two, with partners sitting across 
+		from one another. The deck is shuffled by the dealer and cut by the player to the 
+		dealer’s right. The dealer begins the deal with the player to their left and proceeds 
+		clockwise around the table. Every player must be dealt five cards but the dealer is 
+		only allowed to deal around the table two time. It is most common for the dealer to 
+		deal a round of two cards to each player and then a round of three, or vise versa. 
+		Once each player has been dealt five cards there should be four cards left over. The 
+		dealer turns the top card face up in the middle of the table and sets the remaining 
+		three aside without looking at them or showing them to anyone else.
+		</p>
+
+
+
+			<h3>Card Ranking</h3>
+
+		<p>
+		One of the most difficult concepts for new Euchre players to learn is that the trump 
+		suit can change ever round. Because of this aspect of the game the ranking of the 
+		cards changes every round too. The highest card is the jack of the trump suit, known 
+		as the “right bower.” The second highest card is the jack of the same color suit as 
+		the trump suit, known as the “left bower.” For example, if the trump suit is hearts, 
+		the jack of hearts is the right bower and the jack of diamonds is the left bower. 
+		After the right and left bower the rank of the trump suit is ace, king, queen, 10, 9. 
+		The non-trump suits ranking goes ace, king, queen, jack (if applicable), 10, and 9.
+		</p>
+
+
+
+			<h3>Order of Play</h3>
+
+		<p>
+		Each round of Euchre is made up of two parts: picking the trump suit and taking tricks. 
+		After the deal the player to the left of the dealer gets the chance to accept the suit 
+		of the face up card as trump. If they choose to accept, they pick up the face up card 
+		and add it to their hand. They then must choose a card to discard from their hand (it 
+		can be the one they just picked up) without showing anyone, so they again have five 
+		cards in their hand. If they choose to decline, the decision progresses to the person 
+		to their left who gets the same choice. This continues until the dealer gets the choice. 
+		If the dealer also declines the face up card, that card is discarded. The process begins 
+		again with the player to the left of the dealer. This time they can choose any suit 
+		except for the suit of the face up card that they previously declined. Similarly, if each 
+		player again declines to choose and it becomes the dealer’s choice again this is called 
+		“sticking the dealer” and the dealer must choose a trump suit (not the suit of face up card).
+		</p>
+		<p>
+		Once the trump suit is decided the player to the left of the dealer begins the round by 
+		laying a card in the middle of the table. Proceeding clockwise, each player then plays a 
+		card in turn. Whichever player played the highest card collects the four cards for their 
+		team, this is known as a trick, they then get to play first on the next trick. The first 
+		player to play a card in each trick decides what suit will be played for that trick. The 
+		rest of the players must play a card of the same suit if can. If they do not have a card 
+		of the same suit they can play a different suit. Any card of the trump suit will take 
+		any card of the lead suit. Any card of the other two suits (not trump or lead) will lose 
+		to the lead suit.
+		</p>
+
+
+		<div class="alert alert-primary" role="alert">
+			<div id="flip">
+			<h5>NOTE: Going Alone</h5>
+			</div>
+			<div id="panel">
+			<p class="note">
+			If the player that chooses the trump suit is confident in their hand they can declare that
+			they are ”going alone” as the choose trump. That players partner lays their hand face down
+			and does not participate in that round. Instead the choosing player plays alone against
+			both partners of the other team.
+			</p>
+			</div>
+		</div>
+
+
+			<h3>Scoring</h3>
+
+
+		<p>
+		The team that chose the trump is expected to take more tricks than the non-choosing team. 
+		If they fail to take at least three tricks, the choosing team was “euchred.” Scoring in 
+		Euchre is based on several conditions explained below. Mouse over the conditions to see their associated point value. The first team to reach ten points
+		wins.
+		</p>
+
+		<ul class="list-group">
+			<li class="list-group-item"><p id="sit_1">The team that picked trump takes 3 or 4 tricks:</p><p id="sit_1_p">1 point</p></li>
+			<li class="list-group-item"><p id="sit_2">The team that picked trump takes all 5 tricks:</p><p id="sit_2_p">2 points</p></li>
+			<li class="list-group-item"><p id="sit_3">The team that picked trump is euchred:</p><p id="sit_3_p"> the other team gets 2 points</p></li>
+			<li class="list-group-item"><p id="sit_4">A player going alone takes 3 or 4 tricks:</p><p id="sit_4_p"> 1 point</p></li>
+			<li class="list-group-item"><p id="sit_5">A player going alone takes all 5 tricks:</p><p id="sit_5_p"> 4 points</p></li>
+			<li class="list-group-item"><p id="sit_6">A player going alone is euchred:</p><p id="sit_6_p">the other team gets 2 points</p></li>
+		</ul>
+		<br>
+
+
+		<div class="alert alert-danger" role="alert">
+			<div id="flip1">
+  				<h5>RULE: Table Talk</h5>
+			</div>
+			<div id="panel1">
+				<p class="note">Table talk is illegal in Euchre. Table talk is when any player or players
+				from any team talk about what cards. This could be directly stating which cards they do or do
+				not possess or giving advice or direction about what to play to any other player. It is also
+				table talk to tell another player who played which card if they were not paying attention. If a
+				player asks they may be told which suit is the lead suit but no more.
+				</p>
+			</div>
+		</div>
+
+        <br>
+        <br>
+        <p> Your lucky card is the {{ cards[num1]['card'] }} of {{ suits[num2]['suit'] }}.</p>
+        {% if num1 == 10 %}
+            <p>Hey its a Jack!</p>
+        {% endif %}
+        <br>
+        <br>
+
+		<a href="/">Return to the Home Page</a>
+
+
+
+
+
+
+	</div>
+	</body>
+</html>
+		
+		
+
+		

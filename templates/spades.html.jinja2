@@ -1,0 +1,370 @@
+<!doctype html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="/static/bootstrap.css">
+		<link rel="stylesheet" href="/static/cards.css">
+		<meta name="veiwport" content="width=device-width, initial-scale=1">
+		<title>Spades</title>
+		<script src="/static/jquery-3.5.1.js"></script>
+		<script>
+
+			$(document).ready(function(){
+  			$("#flip").click(function(){
+    		$("#panel").slideToggle("slow");
+	  		});
+
+  			$("#flip1").click(function(){
+    		$("#panel1").slideToggle("slow");
+      		});
+
+  			$("#flip2").click(function(){
+    		$("#panel2").slideToggle("slow");
+	  		});
+
+  			$("#flip22").click(function(){
+    		$("#panel2").slideToggle("slow");
+	  		});
+
+			$("#show_table").click(function(){
+    		$("#show_table").hide();
+    		$("#hide_table").show();
+    		$("#hide_table2").show();
+	  		});
+
+			$("#hide_table").click(function(){
+    		$("#hide_table").hide();
+    		$("#hide_table2").hide();
+    		$("#show_table").show();
+	  		});
+
+			$("#hide_table2").click(function(){
+    		$("#hide_table").hide();
+    		$("#hide_table2").hide();
+    		$("#show_table").show();
+	  		});
+
+	  		//END YOUR CODE
+      		});
+
+    	</script>
+		<style>
+			#panel {
+  			display: none;
+			}
+
+			#panel1 {
+  			display: none;
+			}
+
+			#panel2 {
+  			display: none;
+			}
+
+			#hide_table{
+			font-weight: bold;
+			display: none;
+			}
+			#hide_table2{
+			font-weight: bold;
+			display: none;
+			}
+
+			#show_table{
+			font-weight: bold;
+			}
+
+		</style>
+	</head>
+	<body>
+	<div class="container">
+
+    		<h1 class="title">Spades</h1>
+		<img src="/static/SpadePic.jpg" alt="spade" class="spadepic">
+
+
+
+		<h3>The Deck</h3>
+		<p>
+		The deck used to play Spades is the same as a standard deck of cards except the 2 of hearts and
+		the 2 of diamonds are taken out and replaced by the jokers. In many decks of cards one joker 
+		has color and one does not. In spades the joker with color is known as the “big joker” while
+		the joker without color is known as the “little joker.” If the jokers are identical it is up
+		to the players to define which joker is the big and which is the little, the two must be visually
+		different.
+		</p>
+
+		<h3>Trump Suit</h3>
+		<p>
+			One of the most important and challenging concepts for new spades players to understand is the
+			idea of the trump suit. In Spades, spades is the trump suit meaning that any spade is more
+			“powerful” than any card of another suit. The entire hierarchy of the cards is shown below in the "Card
+			Ranking Reference Table" where a rank of 1 indicates the most powerful and a rank of 28 the least powerful.
+		</p>
+
+
+		<div id="flip2">
+			<p id="show_table">Show Card Ranking Reference Table</p>
+			<p id="hide_table">Hide Card Ranking Reference Table</p>
+		</div>
+		<div id="panel2">
+		<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">Rank</th>
+				<th scope="col">Card</th>
+				<th scope="col">Suit</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">1</th>
+				<td>Big Joker</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>Little Joker</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>2</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">4</th>
+				<td>Ace</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">5</th>
+				<td>King</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">6</th>
+				<td>Queen</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">7</th>
+				<td>Jack</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">8</th>
+				<td>10</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">9</th>
+				<td>9</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">10</th>
+				<td>8</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">11</th>
+				<td>7</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">12</th>
+				<td>6</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">13</th>
+				<td>5</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">14</th>
+				<td>4</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">15</th>
+				<td>3</td>
+				<td>Spades</td>
+			</tr>
+			<tr>
+				<th scope="row">16</th>
+				<td>Ace</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+
+			<tr>
+				<th scope="row">17</th>
+				<td>King</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">18</th>
+				<td>Queen</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">19</th>
+				<td>Jack</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">20</th>
+				<td>10</td>
+				<td>Club, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">21</th>
+				<td>9</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">22</th>
+				<td>8</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">23</th>
+				<td>7</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">24</th>
+				<td>6</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">25</th>
+				<td>5</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">26</th>
+				<td>4</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+			<tr>
+				<th scope="row">27</th>
+				<td>3</td>
+				<td>Clubs, Diamonds, Hearts</td>
+			</tr>
+
+			<tr>
+				<th scope="row">28</th>
+				<td>2</td>
+				<td>Clubs</td>
+			</tr>
+		</tbody>
+		</table>
+		</div>
+
+		<div id="flip22">
+			<p id="hide_table2">Hide Card Ranking Reference Table</p>
+		</div>
+
+		<br>
+
+		<h3>The Deal</h3>
+		<p>
+		The deck is shuffled by the dealer and cut by the player to the right of the dealer.
+		The dealer then deals one card to every player starting with the player to the dealer’s
+		left until there are no cards left. Each player should have 13 cards. After a round is
+		completed the next dealer is the player to the left of the previous dealer.
+		</p>
+
+		<h3>Order of Play</h3>
+		<p>
+		Each round in Spades consists of two parts: the bid and taking books. At the start of every
+		round, immediately after dealing, the dealer’s team begins the bid by deciding amongst one
+		another how many books they believe they can take that round. After they have finalized their
+		bid the other team decided on their bid. While the two partners can talk during this phase 
+		they may not give details about which cards they have in their hand. The players are only 
+		allowed to say how many books they can take. Four books is the minimum bid for a team, and 
+		no team may bid nine. The sum of both teams' bids must be at least ten, if the sum of both teams'
+		bids is less than ten, the result is a misdeal. Once both teams have bid, the score keeper 
+		marks down their bids and the game progresses to the next phase.
+		</p>
+
+		<div class="alert alert-primary" role="alert">
+			<div id="flip">
+  		<h5>NOTE: Going Nil</h5>
+			</div>
+			<div id="panel"
+		<p class="note">There is one exception to the minimum bid of four books rule. If a team wished they can declare 
+		that they are "going nil" which means they bid zero books. If they succeed in losing every single 
+		book they earn 100 points. If they take even one book they lose 100 points.</p>
+		</div>
+		</div>
+
+		<p>
+		After the bidding phase each player lays a card down in clockwise order, beginning with the 
+		player to the left of the dealer. Once every player has played a card the player with the 
+		highest card collects the group of four cards and claims it for their team, this is called 
+		a book. The player who won the previous book become the lead player and begins the next book.
+		All players must play a card of the same suit as the card played by the lead player, unless 
+		they have no cards of that suit. A spade of any value will take any value card of the lead suit.
+		Any other suit (not spades or the lead suit) will lose to any value card of the lead suit or 
+		any spade. If a player is out of the lead suit and takes a book with a spade it is called 
+		"cutting". Spades cannot be led until a spade has been used to cut on a previous book that round. 
+		If a player is caught playing a off-suit card (a card that is not the lead suit) while they 
+		still have cards of the lead suit in their hand, their team is deducted 100 points.
+		</p>
+		
+		<h3>Scoring</h3>
+		<p>
+		After each round, each team totals up their books. If a team takes the same amount or more than
+		their bid, they earn 10 points for every book they bid. For every book they take that is more 
+		than their bid they earn a bag. Each time a team earns 10 bags they are deducted 100 points. If 
+		a team does not earn as many books as they bid they are “set” and they lose 10 points for every 
+		book they bid. If a team is set twice in a row or three times in a game they lose the game. The 
+		first team to reach 500 points wins.
+ 		</p>
+
+		<h3>Scoring Example</h3>
+		<p>
+		Team A bids 6 books and Team B bids 6 books. If Team A ends up taking 8 books, they would get 
+		60 points, ten for each books bid, and 2 bags, one for each additional book. Team B only took 5 
+		which means they are set and they lose 60 points, 10 for each book they bid.
+		</p>
+		
+		<div class="alert alert-danger" role="alert">
+			<div id="flip1">
+  		<h5>Rule: Table Talk</h5>
+			</div>
+			<div id="panel1"
+		<p class="note">Spades is all about observing and anticipating your opponents and partner and to keep the game 
+		fun and competitive table talk is illegal in Spades. Table talk is when any player or players 
+		from any team talk about what cards. This could be directly stating which cards they do or do 
+		not possess or giving advice or direction about what to play to any other player. It is also 
+		table talk to tell another player who played which card if they were not paying attention. If a 
+		player asks they may be told which suit is the lead suit but no more.
+		</p>
+		</div>
+		</div>
+    <br>
+    <br>
+
+        <p> Your lucky card is the {{ cards[num1]['card'] }} of {{ suits[num2]['suit'] }}.</p>
+        {% if num2 == 0 %}
+            <p>Hey its a Spade!</p>
+        {% endif %}
+    <br>
+    <br>
+
+		<a href="/" class="return">Return to the Home Page</a>
+
+
+
+
+
+
+
+
+	</div>
+	</body>
+</html>

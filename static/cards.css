@@ -1,0 +1,49 @@
+h1.title{
+text-align: center;
+text-style: bold;
+margin-top: 100px;
+margin-bottom: 50px;
+
+}
+
+h3{
+margin: 25px 60px;
+
+}
+
+p{
+margin: 25px 50px;
+
+}
+
+p.note{
+color: black;
+opacity: 0.75;
+font-style: italic;
+}
+.return{
+text-align: center;
+margin-bottom: 75px;
+}
+.spadepic {
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5%;
+margin-bottom: 100px;
+}
+.pusoypic {
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+margin-bottom: 100px;
+}
+
+body{
+margin-bottom: 100px;
+}
+
+.container{
+ margin: 50px;
+}
