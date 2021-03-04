@@ -1,0 +1,8 @@
+CREATE TABLE "tweet_db" (
+	"ID"	INTEGER NOT NULL UNIQUE,
+	"content"	TEXT NOT NULL,
+	"time"	INTEGER,
+	"location"	TEXT,
+	"likes"	INTEGER,
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);
