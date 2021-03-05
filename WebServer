@@ -2,11 +2,16 @@ from aiohttp import web
 import aiohttp_jinja2
 import jinja2
 from random import randint
-
+import sqlite3
 
 @aiohttp_jinja2.template('home.html.jinja2')
 async def home(request):
-    return {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'}, {'name': 'Pusoy Dos', 'players': 'three or four'}]}
+    conn = sqlite3.connect('tweet_db.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tweet_db")
+    results = cursor.fetchall()
+    return {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'}, {'name': 'Pusoy Dos', 'players': 'three or four'}],
+            'tweets': results}
 
 @aiohttp_jinja2.template('spades.html.jinja2')
 async def spades(request):
@@ -35,6 +40,14 @@ async def pusoy_dos(request):
                      {'card': '7'}, {'card': '8'}, {'card': '9'},
                      {'card': '10'}, {'card': 'Jack'}, {'card': 'Queen'}, {'card': 'King'}]}
 
+@aiohttp_jinja2.template('tweetpage.html.jinja2')
+async def tweetpage(request):
+    conn = sqlite3.connect('tweet_db.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tweet_db")
+    results = cursor.fetchall()
+    return{'tweets': results}
+
 #async def cardsCSS(request):
     #return{}
 
@@ -54,12 +67,13 @@ def main():
                     web.get('/Spades', spades),
                     web.get('/Euchre', euchre),
                     web.get('/Pusoy Dos', pusoy_dos),
-                    web.static('/static','static')
+                    web.get('/Tweets', tweetpage),
+                    web.static('/static', 'static'),
                     ])
 
 
     print("Webserver 1.0")
 
-    web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="0.0.0.0", port=3000)
 
 main()

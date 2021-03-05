@@ -1,0 +1,37 @@
+<!doctype html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="/static/bootstrap.css">
+		<link rel="stylesheet" href="/static/cards.css">
+		<meta name="veiwport" content="width=device-width, initial-scale=1">
+		<title>Posts</title>
+		<script src="/static/jquery-3.5.1.js"></script>
+		<script>
+
+    	</script>
+    </head>
+
+	<body>
+        <div class="container">
+
+			<div id="main_title">
+    		<h1 class="title">Posts</h1>
+			</div>
+
+            <h3>New Posts</h3>
+            {% for tweet in tweets %}
+                <p>Posted from {{ tweet[3] }}: {{ tweet[1] }}</p>
+            {% endfor %}
+
+	        <p>
+
+	        </p>
+        <br>
+        <br>
+        <br>
+
+            <a href="/" class="return">Return to the Home Page</a>
+	    </div>
+	</body>
+</html>
