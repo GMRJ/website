@@ -21,7 +21,27 @@
 
             <h3>New Posts</h3>
             {% for tweet in tweets %}
-                <p>Posted from {{ tweet[3] }}: {{ tweet[1] }}</p>
+            <div class="alert alert-success" role="alert">
+  		        <h5>Posted from {{ tweet[3] }}:</h5>
+
+			<div id="panel">
+		        <p>{{ tweet[1] }}</p>
+                <p class="note"> Likes: {{ tweet[4] }}</p>
+		    </div>
+            </div>
+            {% endfor %}
+            <br>
+            <br>
+    		<h3>Most Popular Posts</h3>
+
+            {% for x in range(3) %}
+            <div class="alert alert-warning" role="alert">
+  		        <h5>Posted from {{ tweets_likes[x][3] }}:</h5>
+			<div id="panel">
+		        <p>{{ tweets_likes[x][1] }}</p>
+                <p class="note"> Likes: {{ tweets_likes[x][4] }}</p>
+		    </div>
+            </div>
             {% endfor %}
 
 	        <p>

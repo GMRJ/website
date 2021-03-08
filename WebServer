@@ -44,9 +44,11 @@ async def pusoy_dos(request):
 async def tweetpage(request):
     conn = sqlite3.connect('tweet_db.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM tweet_db")
+    cursor.execute("SELECT * FROM tweet_db ORDER BY ID DESC")
     results = cursor.fetchall()
-    return{'tweets': results}
+    cursor.execute("SELECT * FROM tweet_db ORDER BY likes DESC")
+    results_likes = cursor.fetchall()
+    return{'tweets': results, 'tweets_likes': results_likes}
 
 #async def cardsCSS(request):
     #return{}
