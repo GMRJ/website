@@ -19,6 +19,13 @@
     		<h1 class="title">Posts</h1>
 			</div>
 
+            <form action="/Tweet" method="post">
+
+            <input name="Content" type="text">
+            <input type="submit" value="Post">
+
+            </form>
+
             <h3>New Posts</h3>
             {% for tweet in tweets %}
             <div class="alert alert-success" role="alert">
@@ -28,6 +35,9 @@
 		        <p>{{ tweet[1] }}</p>
                 <p class="note"> Likes: {{ tweet[4] }}</p>
 		    </div>
+
+
+            <a class="btn-primary" href="/like?id={{ tweet[4] }}" class="btn-info">Likes: <u> {{ tweet[4] }}</u></a>
             </div>
             {% endfor %}
             <br>
