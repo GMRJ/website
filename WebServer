@@ -53,7 +53,7 @@ async def tweetpage(request):
 async def add_tweet(request):
     data = await request.post()
     content = data["Content"]
-    query = ("INSERT INTO (content, likes) VALUES (\"%s\",0)" % content)
+    query = "INSERT INTO tweet_db (content, likes) VALUES (\"%s\",0)" % content
     print("QUERY: %s" % query)
     conn = sqlite3.connect('tweet_db.db')
     cursor = conn.cursor()
@@ -63,13 +63,14 @@ async def add_tweet(request):
     raise web.HTTPFound('/Tweets')
 
 async def like(request):
-    print(request.query['id'])
     conn = sqlite3.connect('tweet_db.db')
     cursor = conn.cursor()
     tweet_id = request.query['id']
-    cursor.execute("SELECT likes FROM tweets WHERE id=%s" % tweet_id)
+    #print("Post ID: %s" % tweet_id)
+    cursor.execute("SELECT likes FROM tweet_db WHERE id=%s" % tweet_id)
     like_count = cursor.fetchone()[0]
-    cursor.execute("UPDATE tweets SET likes=%d WHERE id=%s" % (like_count + 1, id))
+    #print("Post Like Count: %d" % (like_count + 1))
+    cursor.execute("UPDATE tweet_db SET likes=%d WHERE id=%s" % (like_count + 1, tweet_id))
     conn.commit()
     conn.close()
     raise web.HTTPFound('/Tweets')
@@ -95,6 +96,7 @@ def main():
                     web.get('/Pusoy Dos', pusoy_dos),
                     web.get('/Tweets', tweetpage),
                     web.post('/Tweet', add_tweet),
+                    web.get('/like', like),
                     web.static('/static', 'static'),
                     ])
 
