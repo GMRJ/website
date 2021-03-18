@@ -3,6 +3,7 @@ import aiohttp_jinja2
 import jinja2
 from random import randint
 import sqlite3
+import requests
 
 @aiohttp_jinja2.template('home.html.jinja2')
 async def home(request):
@@ -77,7 +78,7 @@ async def like(request):
 
 def get_location(user_ip):
     api_key = "170f65a7da23462e617246b1041c7804"
-    requests.get("http://api.ipstack.com/%s?access_key=%s" % (user_ip, api_key))
+    result = requests.get("http://api.ipstack.com/%s?access_key=%s" % (user_ip, api_key))
     ip_info = result.json()
     location = "%s, %s" % (ip_info["city"], ip_info["country_name"])
     return location
