@@ -53,12 +53,12 @@ async def tweetpage(request):
 async def add_tweet(request):
     data = await request.post()
     content = data["Content"]
-    query = "INSERT INTO tweet_db (content, likes) VALUES (\"%s\",0)" % content
-    print("QUERY: %s" % query)
     conn = sqlite3.connect('tweet_db.db')
     cursor = conn.cursor()
-    cursor.execute(query)
+    user_location = get_location(request.remote)
+    cursor.execute("INSERT INTO tweet_db (content, likes, location) VALUES (?,0,?)", (content, user_location))
     conn.commit()
+    print(request.remote)
     print("The user tweeted: %s" % data['Content'])
     raise web.HTTPFound('/Tweets')
 
@@ -67,13 +67,33 @@ async def like(request):
     cursor = conn.cursor()
     tweet_id = request.query['id']
     #print("Post ID: %s" % tweet_id)
-    cursor.execute("SELECT likes FROM tweet_db WHERE id=%s" % tweet_id)
+    cursor.execute("SELECT likes FROM tweet_db WHERE id=?", (tweet_id,))
     like_count = cursor.fetchone()[0]
     #print("Post Like Count: %d" % (like_count + 1))
-    cursor.execute("UPDATE tweet_db SET likes=%d WHERE id=%s" % (like_count + 1, tweet_id))
+    cursor.execute("UPDATE tweet_db SET likes=? WHERE id=?", (like_count + 1, tweet_id))
     conn.commit()
     conn.close()
     raise web.HTTPFound('/Tweets')
+
+def get_location(user_ip):
+    api_key = "170f65a7da23462e617246b1041c7804"
+    requests.get("http://api.ipstack.com/%s?access_key=%s" % (user_ip, api_key))
+    ip_info = result.json()
+    location = "%s, %s" % (ip_info["city"], ip_info["country_name"])
+    return location
+
+def like_json(request):
+    conn = sqlite3.connect('tweet_db.db')
+    cursor = conn.cursor()
+    tweet_id = request.query['id']
+    # print("Post ID: %s" % tweet_id)
+    cursor.execute("SELECT likes FROM tweet_db WHERE id=?", (tweet_id,))
+    like_count = cursor.fetchone()[0]
+    # print("Post Like Count: %d" % (like_count + 1))
+    cursor.execute("UPDATE tweet_db SET likes=? WHERE id=?", (like_count + 1, tweet_id))
+    conn.commit()
+    conn.close()
+    return web.json_response(data={"like_count": like_count+1})
 
 #async def cardsCSS(request):
     #return{}
@@ -97,6 +117,7 @@ def main():
                     web.get('/Tweets', tweetpage),
                     web.post('/Tweet', add_tweet),
                     web.get('/like', like),
+                    web.get('/like_json', like_json),
                     web.static('/static', 'static'),
                     ])
 
