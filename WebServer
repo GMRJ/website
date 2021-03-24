@@ -5,14 +5,17 @@ from random import randint
 import sqlite3
 import requests
 
-@aiohttp_jinja2.template('home.html.jinja2')
+#@aiohttp_jinja2.template('home.html.jinja2')
 async def home(request):
     conn = sqlite3.connect('tweet_db.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tweet_db")
     results = cursor.fetchall()
-    return {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'}, {'name': 'Pusoy Dos', 'players': 'three or four'}],
-            'tweets': results}
+    context = {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'},
+                         {'name': 'Pusoy Dos', 'players': 'three or four'}], 'tweets': results}
+    response = aiohttp_jinja2.render_template('home.html.jinja2', request, context)
+    response.set_cookie('logged_in', 'yes')
+    return response
 
 @aiohttp_jinja2.template('spades.html.jinja2')
 async def spades(request):
@@ -125,6 +128,6 @@ def main():
 
     print("Webserver 1.0")
 
-    web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="0.0.0.0", port=3000)
 
 main()
