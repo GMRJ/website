@@ -10,13 +10,14 @@ import hashlib
 @aiohttp_jinja2.template('home.html.jinja2')
 async def home(request):
     user_logged_in = False
-    conn = sqlite3.connect('tweet_db.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies['logged_in'],))
-    result = cursor.fetchone()
-    if result is not None:
-        user_logged_in = True
-    conn.close()
+    if "logged_in" in request.cookies:
+        conn = sqlite3.connect('tweet_db.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies['logged_in'],))
+        result = cursor.fetchone()
+        if result is not None:
+            user_logged_in = True
+        conn.close()
     return {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'},
                          {'name': 'Pusoy Dos', 'players': 'three or four'}], 'user_logged_in': user_logged_in}
 
