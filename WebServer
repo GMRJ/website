@@ -84,13 +84,12 @@ async def login(request):
     conn = sqlite3.connect('tweet_db.db')
     cursor = conn.cursor()
     cursor.execute("SELECT salt FROM users WHERE username=?", (data['username'],))
-    result = cursor.fetchone()[0]
+
+    result = cursor.fetchone()
     #print("Username: ", data['username'])
     if result is None:
         raise web.HTTPFound('/login')
-
-    #salt = result[0]
-    salt = result
+    salt = result[0]
     #print("Salt: ", salt)
     salted_password = data['password'] + salt
     #print("Salted Password: ", salted_password)
