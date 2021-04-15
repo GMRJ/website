@@ -10,6 +10,8 @@ import hashlib
 @aiohttp_jinja2.template('home.html.jinja2')
 async def home(request):
     user_logged_in = False
+    # I have no idea why this works on loopback IP but not on the site
+    # I thought it had something to do with the page asking for a cookie that didnt exist but this didnt fix it.
     if "logged_in" in request.cookies:
         conn = sqlite3.connect('tweet_db.db')
         cursor = conn.cursor()
