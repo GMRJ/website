@@ -32,6 +32,7 @@
                     })
                 })
             })
+
     	</script>
 
     </head>
@@ -65,6 +66,9 @@
             <span class="text-primary" id="tweet-like-count-{{ tweet[0] }}">
                 {{ tweet[4] }}
             </span>
+            {% if user_logged_in == True %}
+                <a href="/delete?id={{ tweet[0] }}" class="btn btn-danger delete-btn">Delete</a>
+            {% endif %}
             </div>
             {% endfor %}
             <br>
@@ -74,6 +78,16 @@
         <br>
 
             <a href="/" class="return">Return to the Home Page</a>
+        <br>
+
+            {% if user_logged_in == False %}
+                <a href="/login" class="card-link">Login</a>
+            {% endif %}
+
+            {% if user_logged_in == True %}
+                <a href="/logout" class="card-link">Logout</a>
+            {% endif %}
+
 	    </div>
 	</body>
 </html>

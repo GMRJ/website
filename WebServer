@@ -4,18 +4,21 @@ import jinja2
 from random import randint
 import sqlite3
 import requests
+import secrets
+import hashlib
 
-#@aiohttp_jinja2.template('home.html.jinja2')
+@aiohttp_jinja2.template('home.html.jinja2')
 async def home(request):
+    user_logged_in = False
     conn = sqlite3.connect('tweet_db.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM tweet_db")
-    results = cursor.fetchall()
-    context = {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'},
-                         {'name': 'Pusoy Dos', 'players': 'three or four'}], 'tweets': results}
-    response = aiohttp_jinja2.render_template('home.html.jinja2', request, context)
-    response.set_cookie('logged_in', 'yes')
-    return response
+    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies['logged_in'],))
+    result = cursor.fetchone()
+    if result is not None:
+        user_logged_in = True
+    conn.close()
+    return {'games': [{'name': 'Spades', 'players': 'four'}, {'name': 'Euchre', 'players': 'four'},
+                         {'name': 'Pusoy Dos', 'players': 'three or four'}], 'user_logged_in': user_logged_in}
 
 @aiohttp_jinja2.template('spades.html.jinja2')
 async def spades(request):
@@ -52,7 +55,60 @@ async def tweetpage(request):
     results = cursor.fetchall()
     cursor.execute("SELECT * FROM tweet_db ORDER BY likes DESC")
     results_likes = cursor.fetchall()
-    return{'tweets': results, 'tweets_likes': results_likes}
+
+    user_logged_in = False
+
+    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies['logged_in'],))
+    username_result = cursor.fetchone()
+    if username_result is not None:
+        user_logged_in = True
+    conn.close()
+    return{'tweets': results, 'tweets_likes': results_likes, 'user_logged_in': user_logged_in}
+
+
+@aiohttp_jinja2.template('login.html.jinja2')
+async def show_login(request):
+    return{}
+
+
+async def logout(request):
+    response = web.Response(text="Success", status=302, headers={'Location': "/"})
+    response.cookies['logged_in'] = ''
+    return response
+
+async def login(request):
+    data = await request.post()
+    conn = sqlite3.connect('tweet_db.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT salt FROM users WHERE username=?", (data['username'],))
+    result = cursor.fetchone()[0]
+    #print("Username: ", data['username'])
+    if result is None:
+        raise web.HTTPFound('/login')
+
+    #salt = result[0]
+    salt = result
+    #print("Salt: ", salt)
+    salted_password = data['password'] + salt
+    #print("Salted Password: ", salted_password)
+    hashed_password = hashlib.md5(salted_password.encode('ascii')).hexdigest()
+    #print("Hashed Password: ", hashed_password)
+    cursor.execute("SELECT COUNT(*) FROM users WHERE username=? AND password=?", (data['username'], hashed_password))
+    query_result = cursor.fetchone()
+    user_exists = query_result[0]
+    #print("User Exists: ", user_exists)
+
+    if user_exists == 0:
+        raise web.HTTPFound('/login')
+
+    response = web.Response(text="Success", status=302, headers={'Location': "/"})
+    logged_in_secret = secrets.token_hex(8)
+    #print("Cookie: ", logged_in_secret)
+    response.cookies['logged_in'] = logged_in_secret
+    cursor.execute("UPDATE users SET cookie=? WHERE username=?", (logged_in_secret, data['username']))
+    conn.commit()
+    conn.close()
+    return response
 
 async def add_tweet(request):
     data = await request.post()
@@ -62,8 +118,8 @@ async def add_tweet(request):
     user_location = get_location(request.remote)
     cursor.execute("INSERT INTO tweet_db (content, likes, location) VALUES (?,0,?)", (content, user_location))
     conn.commit()
-    print(request.remote)
-    print("The user tweeted: %s" % data['Content'])
+    #print(request.remote)
+    #print("The user tweeted: %s" % data['Content'])
     raise web.HTTPFound('/Tweets')
 
 async def like(request):
@@ -99,16 +155,22 @@ def like_json(request):
     conn.close()
     return web.json_response(data={"like_count": like_count+1})
 
-#async def cardsCSS(request):
-    #return{}
-
-#async def bootstrapCSS(request):
-    #return{}
-
-#async def jquery(request):
-#    return{}
-
-
+async def delete(request):
+    tweet_id = request.query['id']
+    if "logged_in" not in request.cookies:
+        raise web.HTTPFound('/login')
+    # print("Logged in cookie confirmed.")
+    conn = sqlite3.connect('tweet_db.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies['logged_in'],))
+    result = cursor.fetchone()
+    if result is None:
+        raise web.HTTPFound('/login')
+    # print("Cookie verified.")
+    cursor.execute("DELETE FROM tweet_db WHERE id=?", (tweet_id,))
+    conn.commit()
+    conn.close()
+    raise web.HTTPFound('/Tweets')
 
 def main():
     app = web.Application()
@@ -121,13 +183,17 @@ def main():
                     web.get('/Tweets', tweetpage),
                     web.post('/Tweet', add_tweet),
                     web.get('/like', like),
+                    web.get('/login', show_login),
+                    web.post('/login', login),
+                    web.get('/logout', logout),
                     web.get('/like_json', like_json),
+                    web.get('/delete', delete),
                     web.static('/static', 'static'),
                     ])
 
 
     print("Webserver 1.0")
 
-    web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="0.0.0.0", port=3000)
 
 main()

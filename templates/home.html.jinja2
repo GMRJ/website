@@ -140,6 +140,14 @@
 	</div>
 	</div>
 
+    {% if user_logged_in == False %}
+        <a href="/login" class="card-link">Login</a>
+    {% endif %}
+
+    {% if user_logged_in == True %}
+        <a href="/logout" class="card-link">Logout</a>
+    {% endif %}
+
 	</div>
 
 
