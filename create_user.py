@@ -10,7 +10,6 @@ def main():
     print("User: %s, with password %s" % (username, password))
     # Step 2: Generate salt
     salt = secrets.token_hex(6)
-    salt = "1234abcd"
     # Step 3: Add salt to password
     salted_password = password+salt
     # Step 4: HASH IT
